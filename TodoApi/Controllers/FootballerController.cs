@@ -36,12 +36,13 @@ namespace TodoApi.Controllers
                 throw new Exception();
             }
             existPlayer.Name = createPlayerRequest.Name;
+            existPlayer.Surname = createPlayerRequest.Surname;
             existPlayer.Age = createPlayerRequest.Age;
             existPlayer.Position = createPlayerRequest.Position;
         }
 
         [HttpDelete]
-        [Route("")]
+        [Route("{id}")]
         public void Delete(int id)
         {
             Storage.footballerList.RemoveAll(player => player.Id == id);

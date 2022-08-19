@@ -47,7 +47,7 @@ namespace TodoApi.Controllers
         }
 
         [HttpDelete]
-        [Route("")]
+        [Route("{id}")]
         public void Delete(int id)
         {
             Storage.clubList.RemoveAll(club => club.Id == id);

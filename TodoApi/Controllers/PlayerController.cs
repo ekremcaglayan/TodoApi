@@ -17,10 +17,10 @@ namespace TodoApi.Controllers
         [HttpGet]
         [Route("{id}")]
         // /player/1
-        public Player Get(int id)
+        public List<Player> Get(int id)
         {
             //GET -> /player/1
-            var player = Storage.playerList.FirstOrDefault(player => player.Id == id);
+            var player = Storage.playerList.FindAll(player => player.Id == id);
             //Player selectPlayer = (from Player in playerList where Player.Id == id select Player).SingleOrDefault();
             return player;
         }
@@ -28,18 +28,18 @@ namespace TodoApi.Controllers
         [HttpGet]
         [Route("name/{name}")]
         // /player/name/ekrem
-        public Player Get(string name)
+        public List<Player> Get(string name)
         {
-            var player = Storage.playerList.FirstOrDefault(player => player.Name == name);
+            var player = Storage.playerList.FindAll(player => player.Name == name);
             return player;
         }
 
         [HttpGet]
         [Route("age/{age}")]
         // /player/age/1
-        public Player GetByAge(int age)
+        public List<Player> GetByAge(int age)
         {
-            var player = Storage.playerList.FirstOrDefault(player => player.Age == age);
+            var player = Storage.playerList.FindAll(player => player.Age == age);
             return player;
         }
 
@@ -70,7 +70,7 @@ namespace TodoApi.Controllers
         }
 
         [HttpDelete]
-        [Route("")]
+        [Route("{id}")]
         public void Delete(int id)
         {
             Storage.playerList.RemoveAll(player => player.Id == id);
