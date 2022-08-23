@@ -6,6 +6,13 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+app.MapWhen(context => context.Request.Query.ContainsKey("Ekrem"), UserTest);
+
+//app.MapWhen(context => context.Request.Path.StartsWithSegments("/v1/user/"), appBuilder =>
+//{
+//    appBuilder.UseMiddleware<ActiveEndPointCheck>();
+//});
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -19,3 +26,12 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+static void UserTest(IApplicationBuilder app)
+{
+    app.Run(async context =>
+    {
+        var test = context.Request.Query["Ekrem"];
+        await context.Response.WriteAsync($"Branch used = {test}");
+    });
+}
